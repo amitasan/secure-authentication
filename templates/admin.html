@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block mainclass %}wide{% endblock %}
+{% block content %}
+<h2>User management (admins only)</h2>
+<table>
+  <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Joined</th><th></th></tr>
+  {% for u in users %}
+  <tr>
+    <td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.email }}</td>
+    <td><span class="badge">{{ u.role }}</span></td><td>{{ u.created_at }}</td>
+    <td>
+      {% if u.id != g.user.id %}
+      <form method="post" action="{{ url_for('set_role', user_id=u.id) }}">
+        <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+        <select name="role">
+          <option value="user" {{ 'selected' if u.role == 'user' }}>user</option>
+          <option value="admin" {{ 'selected' if u.role == 'admin' }}>admin</option>
+        </select>
+        <button>Set</button>
+      </form>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

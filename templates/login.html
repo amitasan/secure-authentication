@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<h2>Log in</h2>
+<form method="post">
+  <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+  <label for="username">Username or email</label>
+  <input type="text" id="username" name="username" required autofocus autocomplete="username">
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" required autocomplete="current-password">
+  <button class="btn" type="submit">Log in</button>
+</form>
+<p>No account? <a href="{{ url_for('register') }}">Register</a></p>
+{% endblock %}

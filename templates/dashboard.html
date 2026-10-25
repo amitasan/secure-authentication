@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ g.user.username }}</h2>
+<p>This page is a protected route: it is only visible to authenticated users.</p>
+<p>Email: {{ g.user.email }}<br>Role: <span class="badge">{{ g.user.role }}</span></p>
+{% endblock %}
